@@ -38,6 +38,15 @@ router.get('/doctors/:id', (req, res, next) => {
 //UPDATE 
 // PATCH /users/:id
 //We will update user information with this api call.
+router.patch('/doctors/:id', (req, res, next) => {
+    const id = req.params.id
+    const doctorData = req.body.doctor
+    Doctor.findById(id)
+        .then(doctor => doctor.updateOne(doctorData))
+        .then(() => res.sendStatus(204))
+        .catch(next)
+})
+
 
 
 //DELETE
