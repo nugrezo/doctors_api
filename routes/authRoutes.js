@@ -7,8 +7,13 @@ const User = require('./../models/userModel')
 //POST /sign-up/
 router.post('/sign-up', (req, res, next) => {
     const userData = req.body.credentials
+    console.log('userData is', userData)
     if (userData.password === userData.passwordConfirmation) {
-        return User.create(userData)
+        User.create({
+            email: userData.email,
+            password: userData.password,
+            passwordConfirmation: userData.passwordConfirmation
+        })
             .then(user => res.status(201).json({ user: user }))
             .catch(next)
     }
