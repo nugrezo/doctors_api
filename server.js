@@ -14,6 +14,7 @@ const clientDevPort = 7165
 
 //requiring userRoutes
 const userRoutes = require('./routes/userRoutes')
+const authRoutes = require('./routes/authRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
 const reviewRoutes = require('./routes/reviewRoutes')
 
@@ -41,6 +42,7 @@ app.use(cors())
 app.use(userRoutes)
 app.use(doctorRoutes)
 app.use(reviewRoutes)
+app.use(authRoutes)
 
 //start application on port 4741
 app.listen(4741, () => console.log('App listening on port 4741'))
