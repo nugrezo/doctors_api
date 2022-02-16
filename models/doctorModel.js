@@ -32,4 +32,4 @@ const doctorSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.exports = mongoose.model('Restaurant', restaurantSchema)
+module.exports = mongoose.model('Doctor', doctorSchema)
