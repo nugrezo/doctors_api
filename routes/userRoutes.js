@@ -30,6 +30,18 @@ router.get('/users/:id', (req, res, next) => {
         .catch(next)
 })
 
+//UPDATE 
+// PATCH /users/:id
+//We will update user information with this api call.
+router.patch('/users/:id', (req, res, next) => {
+    const id = req.params.id
+    const userData = req.body.user
+    User.findById(id)
+        .then(user => user.updateOne(userData))
+        .then(() => res.sendStatus(204))
+        .catch(next)
+})
+
 
 
 module.exports = router
