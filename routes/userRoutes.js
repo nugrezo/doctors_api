@@ -42,6 +42,15 @@ router.patch('/users/:id', (req, res, next) => {
         .catch(next)
 })
 
-
+//DELETE
+//DELETE / users/:id
+//We will delete a user information with it`s id with below api call
+router.delete('/users/:id', (req, res, next) => {
+    const id = req.params.id
+    User.findById(id)
+        .then(user => user.deleteOne())
+        .then(res.sendStatus(204))
+        .catch(next)
+})
 
 module.exports = router
