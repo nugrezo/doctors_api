@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 //requiring userRoutes
 const userRoutes = require('./routes/userRoutes')
 const doctorRoutes = require('./routes/doctorRoutes')
+const reviewRoutes = require('./routes/reviewRoutes')
 
 //connect to mongodb 
 mongoose.connect('mongodb://127.0.0.1/restaurant_api', {
@@ -23,6 +24,7 @@ app.use(express.json())
 //using userRoutes in our app.
 app.use(userRoutes)
 app.use(doctorRoutes)
+app.use(reviewRoutes)
 
 //start application on port 4741
 app.listen(4741, () => console.log('App listening on port 4741'))
