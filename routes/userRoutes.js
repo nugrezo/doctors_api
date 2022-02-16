@@ -11,4 +11,13 @@ router.post('/users', (req, res, next) => {
         .catch(next)
 })
 
+//INDEX
+//GET / users/ 
+//We will get all users created.
+router.get('/users', (req, res, next) => {
+    User.find()
+        .then(users => res.json({ users: users }))
+        .catch(next)
+})
+
 module.exports = router
