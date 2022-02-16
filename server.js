@@ -1,8 +1,8 @@
 //require express module
 const express = require('express')
-
 //require mongoose
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 //requiring userRoutes
 const userRoutes = require('./routes/userRoutes')
@@ -22,6 +22,7 @@ const app = express()
 app.use(express.json())
 
 //using userRoutes in our app.
+app.use(cors())
 app.use(userRoutes)
 app.use(doctorRoutes)
 app.use(reviewRoutes)
