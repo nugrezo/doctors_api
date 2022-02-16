@@ -25,15 +25,15 @@ router.get('/doctors', (req, res, next) => {
         .catch(next)
 })
 
-
-
-
-
-
 //SHOW
-// GET/ users/:id
+// GET/ doctors/:id
 //We will get a single user with this api request.
-
+router.get('/doctors/:id', (req, res, next) => {
+    const id = req.params.id
+    Doctor.findById(id)
+        .then(doctor => res.json({ doctor: doctor }))
+        .catch(next)
+})
 
 //UPDATE 
 // PATCH /users/:id
