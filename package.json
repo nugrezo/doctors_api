@@ -19,9 +19,14 @@
   },
   "homepage": "https://github.com/nugrezo/doctors_api#readme",
   "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bearer": "^0.0.20",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "express": "^4.17.2",
     "mongoose": "^6.2.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "passport": "^0.5.2",
+    "passport-http-bearer": "^1.0.1"
   }
 }

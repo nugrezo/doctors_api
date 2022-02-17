@@ -25,6 +25,7 @@ router.get('/users', (req, res, next) => {
 //We will get a single user with this api request.
 router.get('/users/:id', (req, res, next) => {
     const id = req.params.id
+    console.log("req.params is", req.params)
     User.findById(id)
         .then(user => res.json({ user: user }))
         .catch(next)

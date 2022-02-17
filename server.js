@@ -6,7 +6,18 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 //require database configuaration logic
 //db will be the actual Mongo URI as a string
+
+// require middleware
+const replaceToken = require('./lib/replace_token')
+
+
+const bodyparser=require('body-parser');
+
 const db = require('./config/db')
+
+// require configured passport authentication middleware
+const auth = require('./lib/auth')
+
 // define server and client ports
 // used for cors and local port declaration
 const serverDevPort = 4741
@@ -34,8 +45,17 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN || `http://127.0.0.1:${clientDe
 // define port for API to run on
 const port = process.env.PORT || serverDevPort
 
+// this middleware makes it so the client can use the Rails convention
+// of `Authorization: Token token=<token>` OR the Express convention of
+// `Authorization: Bearer <token>`
+app.use(replaceToken)
+
+// register passport authentication middleware
+app.use(auth)
+
 // middleware requests
 app.use(express.json())
+app.use(bodyparser.json())
 
 //using userRoutes in our app.
 app.use(cors())
@@ -45,4 +65,6 @@ app.use(reviewRoutes)
 app.use(authRoutes)
 
 //start application on port 4741
-app.listen(4741, () => console.log('App listening on port 4741'))
+app.listen(port, () => {
+    console.log('listening on port ' + port)
+})

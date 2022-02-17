@@ -40,6 +40,7 @@ router.get('/doctors/:id', (req, res, next) => {
 //We will update user information with this api call.
 router.patch('/doctors/:id', (req, res, next) => {
     const id = req.params.id
+    console.log('req.params is', req.params)
     const doctorData = req.body.doctor
     Doctor.findById(id)
         .then(doctor => doctor.updateOne(doctorData))
