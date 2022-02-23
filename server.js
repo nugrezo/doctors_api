@@ -56,6 +56,8 @@ app.use(auth)
 // middleware requests
 app.use(express.json())
 app.use(bodyparser.json())
+// this parses requests sent by `$.ajax`, which use a different content type
+app.use(express.urlencoded({ extended: true }))
 
 //using userRoutes in our app.
 app.use(cors())

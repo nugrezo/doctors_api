@@ -10,26 +10,64 @@ const BadParamsError = errors.BadParamsError
 const BadCredentialsError = errors.BadCredentialsError
 const requireToken = passport.authenticate('bearer', { session: false })
 
-
 // SIGN UP
 // POST /sign-up
 router.post('/sign-up', (req, res, next) => {
-    const userData = req.body.credentials
-    console.log(userData)
-  // if PW and PWC match
-  if (userData.password === userData.password_confirmation) {
-    // hash the password
-    bcrypt.hash(userData.password, bcryptSaltRounds)
-      .then(function (hash) {
-        // save the user with the hashed password
-        return Auth.create({email: userData.email, hashedPassword: hash})
-      })
-      .then(user => res.status(201).json({ user }))
-      .catch(next)
-  } else {
-    throw new Error('A required paramater was missing')
-  }
+  // start a promise chain, so that any errors will pass to `handle`
+  console.log('req.body is',req.body)
+  Promise.resolve(req.body.credentials)
+    // reject any requests where `credentials.password` is not present, or where
+    // the password is an empty string
+    .then(credentials => {
+      if (!credentials ||
+          !credentials.password ||
+          credentials.password !== credentials.password_confirmation) {
+        throw new BadParamsError()
+      }
+    })
+    // generate a hash from the provided password, returning a promise
+    .then(() => bcrypt.hash(req.body.credentials.password, bcryptSaltRounds))
+    .then(hash => {
+      // return necessary params to create a user
+      return {
+        email: req.body.credentials.email,
+        hashedPassword: hash
+      }
+    })
+    // create user with provided email and hashed password
+    .then(user => Auth.create(user))
+    // send the new user object back with status 201, but `hashedPassword`
+    // won't be send because of the `transform` in the User model
+    .then(user => res.status(201).json({ user: user.toObject() }))
+    // pass any errors along to the error handler
+    .catch(next)
 })
+
+
+
+
+// // SIGN UP
+// // POST /sign-up
+// router.post('/sign-up', (req, res, next) => {
+//   const userData = req.body.credentials
+//   console.log(req)
+//   console.log(userData)
+//     console.log(userData)
+//   // if PW and PWC match
+//   if (userData.password === userData.password_confirmation) {
+//     console.log(userData.password)
+//     // hash the password
+//     bcrypt.hash(userData.password, bcryptSaltRounds)
+//       .then(function (hash) {
+//         // save the user with the hashed password
+//         return Auth.create({email: userData.email, hashedPassword: hash})
+//       })
+//       .then(user => res.status(201).json({ user }))
+//       .catch(next)
+//   } else {
+//     throw new Error('A required paramater was missing')
+//   }
+// })
 
 // SIGN IN
 // POST /sign-in
