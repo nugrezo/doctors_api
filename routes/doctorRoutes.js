@@ -56,6 +56,7 @@ router.patch('/doctors/:id', requireToken, (req, res, next) => {
     const id = req.params.id
     console.log('req.params is', req.params)
     const doctorData = req.body.doctor
+    console.log('Update doctorData is', doctorData)
     Doctor.findById(id)
         .then(doctor => {
             requireOwnership(req, doctor)

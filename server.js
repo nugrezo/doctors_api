@@ -57,7 +57,7 @@ app.use(auth)
 app.use(express.json())
 app.use(bodyparser.json())
 // this parses requests sent by `$.ajax`, which use a different content type
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true })) 
 
 //using userRoutes in our app.
 app.use(cors())
