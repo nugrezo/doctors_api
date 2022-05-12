@@ -5,7 +5,7 @@ const mongooseBaseName = 'doctors_api'
 
 // create the mongodb uri for development and test
 const database = {
-  development: `mongodb://127.0.0.1/${mongooseBaseName}-development`,
+  development: `mongodb+srv://nugrezo:Soke1q2w!@cluster0.8mw14.mongodb.net/${mongooseBaseName}-development`,
   test: `mongodb://127.0.0.1/${mongooseBaseName}-test`
 }
 

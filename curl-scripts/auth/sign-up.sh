@@ -1,6 +1,6 @@
 #!/bin/bash
 
-curl 'http://127.0.0.1:4741/sign-up' \
+curl 'https://protected-beyond-44813.herokuapp.com/sign-up' \
   --include \
   --request POST \
   --header "Content-Type: application/json" \
