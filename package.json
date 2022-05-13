@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/nugrezo/doctors_api#readme",
   "dependencies": {
-    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "bearer": "^0.0.20",
     "bootstrap": "^5.1.3",
